@@ -11,6 +11,8 @@ router.get("/:postId", async (req, res) => {
 
 router.post("/", async (req, res) => {
     const comment = req.body;
+    console.log("-----------------------------------------")
+    console.log("in Backend", comment)
     await Comments.create(comment);
     res.json(comment);
 })
