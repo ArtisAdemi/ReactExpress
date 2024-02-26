@@ -34,7 +34,7 @@ const Post = () => {
                 alert(res.data.error);
                 return
             }
-            const commentToAdd = {commentBody: newComment};
+            const commentToAdd = {commentBody: newComment, username: res.data.username};
             setComments([...comments, commentToAdd]);
             setNewComment("");
         });
@@ -56,7 +56,13 @@ const Post = () => {
             </div>
             <div className="listOfComments">
                 {comments.map((comment, key) => {
-                    return <div className='comment' key={key}>{comment.commentBody}</div>
+                    return (
+                    <div className='comment' key={key}>
+                        {comment.commentBody}
+                        <br />
+                        <label>by {comment.username}</label>
+                    </div>
+                    )
                 })}
             </div>
         </div>
