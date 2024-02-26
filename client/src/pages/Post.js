@@ -19,7 +19,21 @@ const Post = () => {
     }, []);
 
     const addComment = () => {
-        axios.post("http://localhost:3001/comments", {commentBody: newComment, PostId: id}).then((res) => {
+        axios.post("http://localhost:3001/comments", 
+            {
+                commentBody: newComment,
+                PostId: id
+            },
+            {
+                headers: {
+                    token: sessionStorage.getItem("token"),
+                }
+            }
+            ).then((res) => {
+            if (res.data.error) {
+                alert(res.data.error);
+                return
+            }
             const commentToAdd = {commentBody: newComment};
             setComments([...comments, commentToAdd]);
             setNewComment("");
